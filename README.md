@@ -47,6 +47,9 @@ The file will be saved on `images/generated` with the name being the block numbe
 
 **Example:**
 
-Tiles used: `431, 435, 414, 443, 417, 458, 459, 427, 419`
+Tiles used: `419, 459, 413, 458, 451, 425, 433, 453, 427`
 
-Resulting file name: `431-435-414-443-417-458-459-427-419.png`
+Resulting file name: `419-459-413-458-451-425-433-453-427.png`
+
+Resulting image (with numbers):
+![419-459-413-458-451-425-433-453-427.png](example.png "Random Panel Example")

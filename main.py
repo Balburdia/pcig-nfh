@@ -33,12 +33,12 @@ def create_image_grid(images):
     return grid
 
 
-def create_image_from_numbers(block_numbers, add_number=True):
+def create_image_from_numbers(block_numbers, no_numbers=True):
 
     images = []
     for block in block_numbers:
         img = Image.open(f"{IMAGES_PATH}/{block}.png")
-        if add_number:
+        if not no_numbers:
             editable_image = ImageDraw.Draw(img)
             editable_image.rectangle(((12, 16), (39, 30)), fill="black")
             editable_image.text(
