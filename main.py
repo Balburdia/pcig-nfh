@@ -11,8 +11,7 @@ from PIL.PngImagePlugin import PngImageFile
 
 BACKGROUND_IMAGE = "images/panelBorder.png"
 IMAGES_PATH = os.environ.get("IMAGES_PATH", "images/all")
-BLOCKS_RANGE = (10, 612)
-IGNORE_NUMBERS = [110, 111, 112, 412]
+BLOCKS_RANGE = (1, 650)
 NUMBER_FONT = ImageFont.truetype(
     "fonts/NotoSansMono-Regular-Nerd-Font-Complete.ttf", 12
 )
@@ -28,7 +27,7 @@ def get_numbers_list(nfh: bool = False) -> List[str]:
     # Use all the blocks.
     else:
         start, end = BLOCKS_RANGE
-        return [str(i) for i in range(start, end + 1) if i not in IGNORE_NUMBERS]
+        return [str(i) for i in range(start, end + 1)]
 
 
 def create_image_grid(images: List[PngImageFile]) -> PngImageFile:
@@ -86,13 +85,6 @@ def numbers_sanity_check(numbers_list: List[str]) -> bool:
             print(
                 f"The value '{number}' is outside the blocks range. "
                 f"Blocks range: {min_value}-{max_value}"
-            )
-            return False
-
-        if number in IGNORE_NUMBERS:
-            print(
-                f"The value '{number}' is not available in the contest blocks. "
-                f"Invalid numbers are: {IGNORE_NUMBERS}."
             )
             return False
 

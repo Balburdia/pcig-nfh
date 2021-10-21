@@ -9,14 +9,11 @@ import requests
 
 IMAGES_PATH = os.environ.get("IMAGE_PATH", "images/all")
 BLOCKS_URL = "https://data.thepanels.art/blocks/{number}_ps9_nb.png"
-BLOCKS_RANGE = (10, 612)
-IGNORE_NUMBERS = [110, 111, 112, 412]
+BLOCKS_RANGE = (600, 650)
 
 
 def download_block(number: Union[str, int], path: str = IMAGES_PATH) -> None:
     """Download the block image on the given path."""
-    if number in IGNORE_NUMBERS:
-        return None
     response = requests.get(BLOCKS_URL.format(number=number))
     if response.status_code == 200:
         with open(f"{path}/{number}.png", "wb") as f:
