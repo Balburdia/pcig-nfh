@@ -1,16 +1,19 @@
+"""Download the block images."""
 import argparse
+import json
+import os
+from typing import Union
 
 import requests
-import os
+
 
 IMAGES_PATH = os.environ.get("IMAGE_PATH", "images/all")
 BLOCKS_URL = "https://data.thepanels.art/blocks/{number}_ps9_nb.png"
-NFH_BLOCKS_RANGE = (413, 462)
 BLOCKS_RANGE = (10, 612)
 IGNORE_NUMBERS = [110, 111, 112, 412]
 
 
-def download_block(number: int, path: str = IMAGES_PATH):
+def download_block(number: Union[str, int], path: str = IMAGES_PATH) -> None:
     """Download the block image on the given path."""
     if number in IGNORE_NUMBERS:
         return None
@@ -35,12 +38,14 @@ if __name__ == "__main__":
 
     print("Downloading block images.")
     if args.only_nfh:
-        start, end = NFH_BLOCKS_RANGE
+        with open("nfh_tiles.json", "r") as f:
+            data = json.load(f)
+        for num in data["nfh"]:
+            download_block(num)
     else:
         start, end = BLOCKS_RANGE
-    for num in range(start, end + 1):
-        # To download only NFH images to images/nfh, use this line.
-        # download_block(num, "images/nfh")
-        # To download all images, use this line.
-        download_block(num)
+        for num in range(start, end + 1):
+            # To download only NFH images to images/nfh, use this line.
+            # download_block(num, "images/nfh")
+            download_block(num)
     print("Download finished.")
